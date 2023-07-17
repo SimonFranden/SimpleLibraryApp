@@ -1,0 +1,32 @@
+﻿@model SimpleLibraryApp_MVC.Models.LendBookViewModel
+
+@{
+    ViewData["Title"] = "LendBook";
+}
+
+<h1>Lend books to @Model.Customer.FName @Model.Customer.LName</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Books
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Books) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @*<a asp-action="CreateBookLend" asp-route-id="@item.Id">Lend</a>*@
+                    <a href="@Url.Action("CreateBookLend", "Customer", new { customerId = Model.Customer.Id, bookId = item.Id })" class="btn btn-success mb-1">Lend</a
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

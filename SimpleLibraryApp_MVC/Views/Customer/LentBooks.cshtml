@@ -1,0 +1,63 @@
+﻿@model SimpleLibraryApp_MVC.Models.LentBooksViewModel
+
+@{
+    ViewData["Title"] = "Customer rented books";
+}
+
+<h1>Lent Books</h1>
+
+<p>
+    <a asp-action="LendBook" asp-route-id="@Model.Customer.Id" class="btn btn-success">+Lend new book</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+               Book Title
+            </th>
+            <th>
+                Customer
+            </th>
+            <th>
+                Date lent
+            </th>
+            <th>
+                Returned
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.LentBooks) {
+        <tr>
+            <td>               
+                @Html.DisplayFor(modelItem => item.Book.Title)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.Customer.FName) @Html.DisplayFor(modelItem => item.Customer.LName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateLent)
+            </td>
+            <td>
+                @if(item.IsReturned)
+                {<p class="text-success">yes</p>}
+                else
+                {
+                        <p class="text-danger">No</p>                       
+                }
+                
+            </td>
+            <td>
+                    @if (!item.IsReturned){
+                        <a asp-action="ReturnBook" asp-route-id="@item.Id" class="btn btn-primary mb-1">ReturnBook</a>
+                    }
+            </td>            
+        </tr>
+}
+    </tbody>
+</table>
+
+<div>
+    <a asp-action="Index" class="btn btn-dark mb-1">Back to customers</a>
+</div>
