@@ -1,10 +1,10 @@
 ﻿@model SimpleLibraryApp_MVC.Models.LentBooksViewModel
 
 @{
-    ViewData["Title"] = "Customer rented books";
+    ViewData["Title"] = "Lent books";
 }
 
-<h1>Lent Books</h1>
+<h1>Books Lent to @Model.Customer.FName  @Model.Customer.LName</h1>
 
 <p>
     <a asp-action="LendBook" asp-route-id="@Model.Customer.Id" class="btn btn-success">+Lend new book</a>
@@ -50,7 +50,7 @@
             </td>
             <td>
                     @if (!item.IsReturned){
-                        <a asp-action="ReturnBook" asp-route-id="@item.Id" class="btn btn-primary mb-1">ReturnBook</a>
+                        <a asp-action="ReturnBook" asp-route-id="@item.Id" class="btn btn-primary mb-1">Return</a>
                     }
             </td>            
         </tr>
